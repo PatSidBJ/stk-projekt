@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Objednávka služby</title>
+
+    <!-- Flatpickr Calendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #F2F2F2; 
+            color: #4A4A4A;     
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1E4E8C; 
+            margin-bottom: 40px;
+        }
+
+        .form-wrapper {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .form-section {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 300px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #C62828; 
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            margin-top: 25px;
+            width: 100%;
+            padding: 15px;
+            background: #1E4E8C; 
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #163a66;
+        }
+
+        /* uprava pre mobily */
+        @media (max-width: 700px) {
+            .container {
+                margin: 20px auto;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Objednávka služby</h1>
+
+    <form class="form-wrapper" action="submit.php" method="post">
+
+        <!-- lava strana -->
+        <div class="form-section">
+            <h2>Vaše údaje</h2>
+
+            <label for="name">Meno a priezvisko / firma</label>
+            <input id="name" name="meno" type="text" placeholder="Zadajte meno alebo názov firmy">
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Zadajte email">
+
+            <label for="phone">Telefón</label>
+            <input id="phone" name="telefon" type="text" placeholder="Zadajte telefón">
+
+            <h2>Termín</h2>
+
+            <label for="datePicker">Dátum</label>
+            <input id="datePicker" name="datum" type="text" placeholder="Vyberte dátum">
+            
+            <label for="timePicker">Čas</label>
+            <select id="timePicker" name="cas" disabled>
+                <option value="" disabled selected>Vyberte čas</option>
+                <option value="06:30">06:30</option>
+                <option value="07:00">07:00</option>
+                <option value="07:30">07:30</option>
+                <option value="08:00">08:00</option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+            </select>
+            <p style="font-size: 12px; color: #777; margin-top: 5px;">(Dostupné časy: 06:30 - 15:00, po 30 minútach)
+            </p>
+            <label style="font-size: 12px; color: #777; margin-top: 5px;">pre zrušenie alebo zmenu objednávky nás kontaktujte na email info@stknovak.sk alebo telefón.</label>
+        </div>
+
+        <!-- prava strana -->
+        <div class="form-section">
+            <h2>Výber služby</h2>
+
+            <select id="technicka" name="technicka">
+                <option value="bez TK" selected>Bez technickej kontroly</option>
+                <option value="Pravidelná">Pravidelná</option>
+                <option value="Opakovaná">Opakovaná</option>
+                <option value="Administratívna">Administratívna</option>
+                <option value="Zvláštna">Zvláštna</option>
+                <option value="Dovoz COC">Dovoz COC</option>
+            </select>
+            <select id="emisna" name="emisna">
+                <option value="bez EK" selected>Bez emisnej kontroly</option>
+                <option value="Pravidelná">Pravidelná</option>
+                <option value="Opakovaná">Opakovaná</option>
+                <option value="Administratívna">Administratívna</option>
+                <option value="Zvláštna">Zvláštna</option>
+                <option value="Dovoz COC">Dovoz COC</option>
+            </select>
+            <select id="originalita" name="originalita">
+                <option value="bez KO" selected>Bez kontroly originality</option>
+                <option value="Pravidelná">Pravidelná</option>
+                <option value="Opakovaná">Opakovaná</option>
+                <option value="Administratívna">Administratívna</option>
+                <option value="Zvláštna">Zvláštna</option>
+                <option value="Dovoz COC">Dovoz COC</option>
+            </select>
+
+            <h2>Vaše vozidlo</h2>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 50%;">  
+                    <textarea id="spz" name="spz" placeholder="ŠPZ" style="width: 100%; height: 100%;"></textarea>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px; width: 50%;">   
+                    <select id="palivo" name="palivo">
+                    <option value="" disabled selected>Vyberte druh paliva</option>
+                    <option value="Benzín">Benzín</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Elektro">Elektro</option>
+                    <option value="CNG">CNG</option>
+                    <option value="LPG">LPG</option>
+                    <option value="Iné">Iné</option>
+                </select>
+                <select id="typ_vozidla" name="typ_vozidla">
+                    <option value="" disabled selected>Vyberte typ vozidla</option>
+                    <option value="Osobné">Osobné</option>
+                    <option value="Dodávka a nákladné">Dodávka a nákladné</option>
+                    <option value="Motocykel">Motocykel</option>
+                    <option value="Príves">Príves (vozík)</option>
+                    <option value="Príves + osobné vozidlo">Príves + osobné vozidlo</option>
+                    <option value="Príves + nákladné vozidlo">Príves + nákladné vozidlo</option>
+                    <option value="Iné">Iné</option>
+                </select>
+                </div>
+        
+                
+                
+            </div>
+            
+
+            <label for="poznamka">Poznámka</label>
+            <textarea id="poznamka" name="poznamka" placeholder="Ďalšie informácie..."></textarea>
+
+            <label style="margin-top: 1px; display: flex; align-items: center;">
+                <input type="checkbox" id="gdprConsent" name="gdpr_consent" style="flex: 0" required> 
+                <span style="margin-left: 5px; flex:1;">Súhlasím so spracovaním osobných údajov podľa <a href="gdpr.html" target="_blank">zásad ochrany osobných údajov</a> pre spracovanie objednávky.</span>
+            </label>
+
+            <button class="submit-btn" id="submitBtn">Odoslať objednávku</button>
+        </div>
+
+    </form>
+</div>
+
+<!-- js flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    // inicializacia kalendara
+    flatpickr("#datePicker", {
+        dateFormat: "d.m.Y",
+        minDate: "today",
+        disableMobile: true
+    });
+    let takenTimes = []; // bude naplnené dynamicky
+    flatpickr("#datePicker", {
+        dateFormat: "d.m.Y",
+        minDate: "today",
+
+        // odstranenie víkendov
+        disable: [
+            function(date) {
+                return (date.getDay() === 0 || date.getDay() === 6); 
+            }
+        ],
+
+        onChange: function(selectedDates, dateStr) {
+            // fetch obsadené časy pre vybraný dátum
+            fetch('get_taken_times.php?datum=' + encodeURIComponent(dateStr))
+                .then(response => response.json())
+                .then(data => {
+                    takenTimes = data;
+                    updateTimeSelect(takenTimes);
+                })
+                .catch(error => {
+                    console.error('Chyba pri načítaní obsadených časov:', error);
+                    takenTimes = [];
+                    updateTimeSelect([]);
+                });
+                timepicker = document.getElementById('timePicker'); // reset výberu času  
+                timepicker.disabled = false; // povoliť výber času po výbere dátumu
+        }
+    });
+
+    // --- UPDATE TIME SELECT ---
+    function updateTimeSelect(takenTimes) {
+        const select = document.getElementById('timePicker');
+        const options = select.options;
+        for (let i = 0; i < options.length; i++) {
+            const value = options[i].value;
+            if (value) { // skip the "Vyberte čas" option
+                options[i].disabled = takenTimes.includes(value);
+                options[i].style.color = takenTimes.includes(value) ? '#ccc' : '';
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>
